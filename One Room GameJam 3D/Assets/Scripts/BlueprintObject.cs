@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BlueprintObject : MonoBehaviour{
     public GameObject placablePrefab;
-    private TestBuilding building;
+    private BuildingSystem building;
 
     private void Awake()
     {
-        building = TestBuilding.Instance;
+        building = BuildingSystem.Instance;
     }
 
     private void Update()

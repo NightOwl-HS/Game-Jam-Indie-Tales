@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class TestBuilding : MonoBehaviour
+public class BuildingSystem : MonoBehaviour
 {
     public GameObject placableBlueprintPrefab;
     private BlueprintObject tempObject;
 
-    public static TestBuilding Instance;
+    public static BuildingSystem Instance;
 
     private Vector3 tempPos;
     private bool selectedGhost = false;
@@ -16,7 +16,7 @@ public class TestBuilding : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;        
+        Instance = this;
     }
     private void Start()
     {
@@ -27,26 +27,29 @@ public class TestBuilding : MonoBehaviour
     {
         Debug.Log(placableBlueprintPrefab);
         Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(camRay, out RaycastHit rayHit, float.MaxValue, placableLayer)){
-            tempPos = new Vector3(rayHit.point.x, rayHit.point.y + placableBlueprintPrefab.transform.localScale.y / 2, rayHit.point.z);           
+
+        if (Physics.Raycast(camRay, out RaycastHit rayHit, float.MaxValue, placableLayer))
+        {
+            tempPos = new Vector3(rayHit.point.x, rayHit.point.y + placableBlueprintPrefab.transform.localScale.y / 2, rayHit.point.z);
         }
 
-        if (Input.GetMouseButtonDown(1) && !selectedGhost)
+        if (Input.GetKey(KeyCode.H) && !selectedGhost)
         {
             PlaceBlueprintObject(tempPos);
             selectedGhost = true;
         }
-        else if(Input.GetMouseButtonDown(1) && selectedGhost)
+        else if (Input.GetKey(KeyCode.H) && selectedGhost)
         {
             Destroy(tempObject.gameObject);
             selectedGhost = false;
         }
-        
-        if (Input.GetMouseButtonDown(0) && tempObject){
+
+        if (Input.GetKey(KeyCode.J) && tempObject)
+        {
             tempObject.CreatePlacable();
             selectedGhost = false;
         }
-        
+
     }
 
     public Vector3 mousePos()
@@ -54,7 +57,8 @@ public class TestBuilding : MonoBehaviour
         return tempPos;
     }
 
-    private void PlaceBlueprintObject(Vector3 placePos){
+    private void PlaceBlueprintObject(Vector3 placePos)
+    {
         tempObject = Instantiate(placableBlueprintPrefab, placePos, Quaternion.identity).GetComponent<BlueprintObject>();
     }
 }
