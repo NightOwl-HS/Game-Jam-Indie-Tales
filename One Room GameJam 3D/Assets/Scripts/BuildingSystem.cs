@@ -25,7 +25,6 @@ public class BuildingSystem : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(placableBlueprintPrefab);
         Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(camRay, out RaycastHit rayHit, float.MaxValue, placableLayer))
