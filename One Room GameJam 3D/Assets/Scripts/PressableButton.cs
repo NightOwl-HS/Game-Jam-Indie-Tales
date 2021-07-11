@@ -6,30 +6,22 @@ public class PressableButton : MonoBehaviour
 {
     private bool pressed;
     public GameObject ghostBlock;
-
-    private void Update()
-    {
-        CheckButton();
-    }
-    private void CheckButton()
-    {
-        if (pressed)
-        {
-            ButtonPress();
-        }
-    }
-
-    private void ButtonPress()
+    private void Press()
     {
         ghostBlock.SetActive(true);
         Destroy(gameObject);
+    }
+
+    public void PressButton()
+    {
+        Press();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            pressed = true;
+            PressButton();
         }
     }
 }

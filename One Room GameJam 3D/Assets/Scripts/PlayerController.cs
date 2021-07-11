@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 20;
     public bool grounded;
     public LayerMask whatIsGround;
-    public float downForce;
 
     public float counterMovement = 0.175f;
     private float threshold = 0.01f;
@@ -34,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public float slideCounterMovement = 0.2f;
 
     //Jumping
+    public float downForce;
     private bool readyToJump = true;
     private float jumpCooldown = 0.25f;
     public float jumpForce = 550f;
@@ -54,10 +54,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerScale = transform.localScale;
-        /*
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        */
     }
 
 
@@ -164,8 +162,11 @@ public class PlayerController : MonoBehaviour
             readyToJump = false;
 
             //Add jump forces
-            rb.AddForce(Vector2.up * jumpForce * 1.5f);
-            rb.AddForce(normalVector * jumpForce * 0.5f);
+            //rb.AddForce(Vector2.up * jumpForce * 1.5f);
+            //rb.AddForce(normalVector * jumpForce * 0.5f);
+            Vector3 tempVel = rb.velocity;
+            tempVel.y = jumpForce;
+            rb.velocity = tempVel;
 
             //If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
@@ -184,7 +185,6 @@ public class PlayerController : MonoBehaviour
     }
 
     private float desiredX;
-    
     private void Look()
     {
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
@@ -199,10 +199,9 @@ public class PlayerController : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         //Perform the rotations
-        //playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
+        playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
     }
-    
 
     private void CounterMovement(float x, float y, Vector2 mag)
     {

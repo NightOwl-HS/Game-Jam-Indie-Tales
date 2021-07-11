@@ -9,6 +9,7 @@ public class StageController : MonoBehaviour
 
     public static StageController Instance;
     private StageInfo stageUsing;
+    private List<GameObject> stageUsingElements = new List<GameObject>();
     //public GameObject[][] stages;
 
     private void Awake()
@@ -18,7 +19,7 @@ public class StageController : MonoBehaviour
 
     private void Start()
     {
-        stageUsing = stages[0];    
+        LoadStage(1);   
     }
 
     private void Update()
@@ -48,9 +49,11 @@ public class StageController : MonoBehaviour
 
     private void DestroyAllStageObjects()
     {
+        if (!stageUsing) return;
         for (int i = 0; i < stageUsing.stageObjects.Length; i++)
         {
-            Destroy(stageUsing.stageObjects[i]);
+            Destroy(stageUsingElements[i].gameObject);
+            stageUsingElements.Remove(stageUsingElements[i]);
         }
     }
 
@@ -58,7 +61,8 @@ public class StageController : MonoBehaviour
     {
         for (int i = 0; i < stageUsing.stageObjects.Length; i++)
         {
-            Instantiate(stageUsing.stageObjects[i], stageUsing.stageObjects[i].transform.position, stageUsing.stageObjects[i].transform.rotation);
+            GameObject temp = (GameObject)Instantiate(stageUsing.stageObjects[i], stageUsing.stageObjects[i].transform.position, stageUsing.stageObjects[i].transform.rotation);
+            stageUsingElements.Add(temp);
             Debug.Log("Yeet!");
         }
     }

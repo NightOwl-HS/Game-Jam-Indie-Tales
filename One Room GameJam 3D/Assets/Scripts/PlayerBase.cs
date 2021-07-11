@@ -5,7 +5,11 @@ public class PlayerBase : MonoBehaviour{
     public GameObject arrowPrefab;
     public Transform shootPosition;
     public Transform orientation;
-    private float arrowMoveSpeed = 400f;
+    private float arrowMoveSpeed = 1000f;
+
+    public Animator anim;
+
+
 
     private void Update()
     {
