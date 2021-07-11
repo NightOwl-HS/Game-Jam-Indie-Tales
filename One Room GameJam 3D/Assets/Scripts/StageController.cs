@@ -8,9 +8,18 @@ public class StageController : MonoBehaviour
     //public List<GameObject[]> list = new List<GameObject[]>();
 
     public static StageController Instance;
+
+    private GameController controller;
+
     private StageInfo stageUsing;
+
     private List<GameObject> stageUsingElements = new List<GameObject>();
     //public GameObject[][] stages;
+
+    public StageInfo ReturnStageInfo()
+    {
+        return stageUsing;
+    }
 
     private void Awake()
     {
@@ -19,6 +28,7 @@ public class StageController : MonoBehaviour
 
     private void Start()
     {
+        controller = GameController.Instance;
         LoadStage(1);   
     }
 
@@ -31,6 +41,14 @@ public class StageController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             LoadStage(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            LoadStage(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            LoadStage(4);
         }
     }
 
@@ -63,6 +81,7 @@ public class StageController : MonoBehaviour
         {
             GameObject temp = (GameObject)Instantiate(stageUsing.stageObjects[i], stageUsing.stageObjects[i].transform.position, stageUsing.stageObjects[i].transform.rotation);
             stageUsingElements.Add(temp);
+            controller.InstantiatePlayerAtSpawn();
             Debug.Log("Yeet!");
         }
     }

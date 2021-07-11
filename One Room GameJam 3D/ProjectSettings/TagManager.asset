@@ -8,6 +8,8 @@ TagManager:
   - Arrow
   - Button
   - Wall
+  - Spawn
+  - CameraTransform
   layers:
   - Default
   - TransparentFX

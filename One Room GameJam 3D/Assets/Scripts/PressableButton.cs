@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class PressableButton : MonoBehaviour
 {
-    private bool pressed;
     public GameObject ghostBlock;
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
     private void Press()
     {
-        ghostBlock.SetActive(true);
-        Destroy(gameObject);
+        Debug.Log("AAA");
+        ghostBlock.SetActive(!ghostBlock.activeInHierarchy);
+        anim.SetBool("Pressed", true);
     }
 
     public void PressButton()

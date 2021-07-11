@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance;
+
 
     //Assingables
     public Transform playerCam;
@@ -10,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     //Other
     private Rigidbody rb;
+
+    private bool playerRunning = false;
 
     //Rotation
     private float xRotation;
@@ -49,6 +53,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        Instance = this;
     }
 
     void Start()
@@ -67,7 +72,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         MyInput();
-        Look();
+        if (playerCam)
+        {
+            Look();
+        }
     }
 
     /// <summary>
@@ -153,6 +161,24 @@ public class PlayerController : MonoBehaviour
         //Apply forces to move player
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
+
+        if(xMag != 0 || yMag != 0)
+        {
+            playerRunning = true;
+        }
+        else
+        {
+            playerRunning = false;
+        }
+    }
+
+    public bool IsPlayerRunning()
+    {
+        return playerRunning;
+    }
+    public void SetCamera(Transform cam)
+    {
+        playerCam = cam;
     }
 
     private void Jump()

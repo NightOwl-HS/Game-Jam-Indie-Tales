@@ -4,5 +4,4 @@ public class StageInfo : ScriptableObject
 {
     public GameObject[] stageObjects;
     public int id;
-
 }

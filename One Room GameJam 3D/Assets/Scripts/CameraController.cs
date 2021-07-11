@@ -1,20 +1,40 @@
 using UnityEngine;
-public class CameraController : MonoBehaviour{
+public class CameraController : MonoBehaviour
+{
 
     public Transform playerTransform;
     private Vector3 cameraOffset;
+
+    public static CameraController Instance;
+
+    private bool followed = false;
 
     private float rotationSpeed = 5f;
     private float smoothAmount = .5f;
     private bool lookAtPlayer = false;
     private bool rotateAroundPlayer = true;
 
+    public void SetFollowTransform(Transform trans)
+    {
+        playerTransform = trans;
+    }
+
+
     private void Start()
     {
+        Instance = this;
+        Debug.Log(playerTransform.position);
         cameraOffset = transform.position - playerTransform.position;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
     private void Update()
     {
+        if (!followed)
+        {
+            cameraOffset = transform.position - playerTransform.position;
+            followed = true;
+        }
+
         if (Input.GetKey(KeyCode.F))
         {
             rotateAroundPlayer = !rotateAroundPlayer;
@@ -30,12 +50,15 @@ public class CameraController : MonoBehaviour{
             cameraOffset = camTurnAngle * cameraOffset;
         }
 
-        Vector3 newPos = playerTransform.position + cameraOffset;
-        transform.position = Vector3.Slerp(transform.position, newPos, smoothAmount);
-        
-        if (rotateAroundPlayer || lookAtPlayer)
+        if (playerTransform)
         {
-            transform.LookAt(playerTransform.position);
-        }      
+            Vector3 newPos = playerTransform.position + cameraOffset;
+            transform.position = Vector3.Slerp(transform.position, newPos, smoothAmount);
+
+            if (rotateAroundPlayer || lookAtPlayer)
+            {
+                transform.LookAt(playerTransform.position);
+            }
+        }
     }
 }
