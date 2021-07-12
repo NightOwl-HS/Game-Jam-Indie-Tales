@@ -50,6 +50,14 @@ public class StageController : MonoBehaviour
         {
             LoadStage(4);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            LoadStage(5);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            LoadStage(6);
+        }
     }
 
     public void LoadStage(int givenIndex)
@@ -81,7 +89,8 @@ public class StageController : MonoBehaviour
         {
             GameObject temp = (GameObject)Instantiate(stageUsing.stageObjects[i], stageUsing.stageObjects[i].transform.position, stageUsing.stageObjects[i].transform.rotation);
             stageUsingElements.Add(temp);
-            controller.InstantiatePlayerAtSpawn();
+            Transform spawnTransform = temp.transform.Find("SpawnPosition");
+            controller.InstantiatePlayerAtSpawn(spawnTransform);
             Debug.Log("Yeet!");
         }
     }

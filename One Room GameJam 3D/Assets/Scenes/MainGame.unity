@@ -161,7 +161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142388284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.5, z: -1.75}
+  m_LocalPosition: {x: 0, y: 3.5, z: -3.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -177,7 +177,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 308058441}
-  - component: {fileID: 308058440}
   - component: {fileID: 308058442}
   - component: {fileID: 308058443}
   - component: {fileID: 308058444}
@@ -188,22 +187,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &308058440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 308058439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca4d9dcc20bae934b9ec63d1465a45ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placableBlueprintPrefab: {fileID: 2360520126755997181, guid: 116ef14ff9733f24f97212be8515eb05, type: 3}
-  placableLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!4 &308058441
 Transform:
   m_ObjectHideFlags: 0
@@ -235,6 +218,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 898b95ba3b760d64e843fcc069c72728, type: 2}
   - {fileID: 11400000, guid: 9da1ed4301ad9cf4ebf5bc34ca7b56d5, type: 2}
   - {fileID: 11400000, guid: 81dccfc33db8f0542b9d99b2de2ea9d0, type: 2}
+  - {fileID: 11400000, guid: a8f019b3b7fc16d4d9a601b1f342bd21, type: 2}
+  - {fileID: 11400000, guid: bc85f8b43a3397946bfbc8577afc7791, type: 2}
 --- !u!114 &308058443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +248,11 @@ MonoBehaviour:
   clips:
   - clipName: ArrowShootClip
     clip: {fileID: 8300000, guid: 0ce16a70cbcb97a4a8186d85d23077b1, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - clipName: JumpClip
+    clip: {fileID: 8300000, guid: 7cee83d8a9cb2e44daf699e01d760827, type: 3}
     volume: 0.5
     pitch: 1
     source: {fileID: 0}

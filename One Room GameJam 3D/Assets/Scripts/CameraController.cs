@@ -24,12 +24,14 @@ public class CameraController : MonoBehaviour
     {
         Instance = this;
         Debug.Log(playerTransform.position);
-        cameraOffset = transform.position - playerTransform.position;
+        
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        cameraOffset = transform.position - playerTransform.position;
     }
     private void Update()
     {
-        if (!followed)
+
+        if (!followed && playerTransform)
         {
             cameraOffset = transform.position - playerTransform.position;
             followed = true;

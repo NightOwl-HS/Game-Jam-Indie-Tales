@@ -40,16 +40,19 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void InstantiatePlayerAtSpawn()
+    public void InstantiatePlayerAtSpawn(Transform pos)
     {
+        
         Transform spawnPos = GameObject.FindGameObjectWithTag("Spawn").transform;
+        Debug.Log(spawnPos);
         Destroy(player);
-        CreatePlayer(spawnPos);
+        CreatePlayer(pos);
     }
 
     private void CreatePlayer(Transform spawnPos)
     {
         player = (GameObject)Instantiate(playerPrefab, spawnPos.position, Quaternion.identity);
+        CameraController.Instance.playerTransform = player.transform;
         playerBase = player.GetComponent<PlayerBase>();
         CameraController.Instance.SetFollowTransform(player.transform);
         playerBase.SetPlayerCameraTransform(CameraController.Instance.transform);

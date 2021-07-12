@@ -194,6 +194,8 @@ public class PlayerController : MonoBehaviour
             tempVel.y = jumpForce;
             rb.velocity = tempVel;
 
+            AudioManager.Instance.PlaySound("JumpClip");
+
             //If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
             if (rb.velocity.y < 0.5f)
